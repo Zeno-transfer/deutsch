@@ -1,0 +1,1862 @@
+
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>DeutschQuest — Gjermanisht për Kundenservice</title>
+
+<style>
+:root {
+  --green: #58a832;
+  --green-dark: #397d21;
+  --green-soft: #eff7e9;
+  --ink: #243449;
+  --muted: #718096;
+  --border: #e4e9ee;
+  --bg: #f7f9fc;
+  --blue: #287ac8;
+  --blue-soft: #edf5ff;
+  --red: #bd424b;
+  --red-soft: #fff1f1;
+  --white: #fff;
+  --radius: 17px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid #76b9fa;
+  outline-offset: 3px;
+}
+button:disabled { cursor: default; opacity: .65; }
+.hidden { display: none !important; }
+.topbar {
+  height: 70px;
+  padding: 0 24px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 21px;
+  font-weight: 850;
+  letter-spacing: -.6px;
+  color: var(--green-dark);
+}
+.brand-mark {
+  width: 39px;
+  height: 39px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: white;
+  font-size: 23px;
+}
+.header-note { color: var(--muted); font-size: 13px; }
+.app-layout {
+  max-width: 1240px;
+  margin: auto;
+  padding: 28px 22px 60px;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 740px);
+  gap: 30px;
+  justify-content: center;
+}
+.sidebar {
+  align-self: start;
+  position: sticky;
+  top: 94px;
+}
+.nav-label {
+  padding: 0 12px;
+  margin: 10px 0 9px;
+  color: #98a3b1;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 1.2px;
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  padding: 13px 12px;
+  color: #617084;
+  font-weight: 750;
+  margin-bottom: 5px;
+}
+.nav-btn .nav-icon { font-size: 21px; width: 26px; text-align: center; }
+.nav-btn.active {
+  background: var(--green-soft);
+  border-color: #d8e9ce;
+  color: var(--green-dark);
+}
+.nav-btn:hover { background: #f0f4ed; }
+.sidebar-note {
+  margin-top: 24px;
+  padding: 17px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.sidebar-note strong { font-size: 13px; }
+.sidebar-note p { font-size: 12px; color: var(--muted); margin-bottom: 0; }
+main { min-width: 0; }
+.hero {
+  border: 1px solid #dcebd4;
+  background: linear-gradient(135deg, #f1f8ec, #f9fcf6);
+  border-radius: 23px;
+  padding: 30px;
+  margin-bottom: 28px;
+}
+.eyebrow {
+  color: var(--green-dark);
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-size: clamp(28px, 4vw, 39px);
+  line-height: 1.18;
+  letter-spacing: -1.1px;
+  margin: 12px 0;
+}
+.hero p { color: #61715d; max-width: 520px; }
+.hero-bottom {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+.hero-caption { font-size: 12px; color: var(--muted); }
+.primary, .secondary, .outline {
+  border-radius: 12px;
+  padding: 12px 17px;
+  font-weight: 800;
+  transition: background .15s, transform .15s;
+}
+.primary {
+  color: white;
+  background: var(--green);
+  border: 1px solid var(--green);
+}
+.primary:hover { background: var(--green-dark); }
+.secondary {
+  color: var(--green-dark);
+  background: var(--green-soft);
+  border: 1px solid #d7e8cd;
+}
+.outline {
+  color: var(--ink);
+  background: white;
+  border: 1px solid var(--border);
+}
+.primary:active, .secondary:active { transform: translateY(1px); }
+.full { width: 100%; }
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 25px 0 14px;
+}
+.section-heading h2 { margin: 0; font-size: 21px; letter-spacing: -.4px; }
+.section-heading p { margin: 3px 0 0; font-size: 13px; color: var(--muted); }
+.pill {
+  display: inline-block;
+  border-radius: 7px;
+  padding: 4px 8px;
+  background: #edf2f7;
+  color: #52657a;
+  font-size: 11px;
+  font-weight: 850;
+}
+.module-list { display: grid; gap: 12px; }
+.module-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: white;
+  color: var(--ink);
+}
+.module-card:hover { border-color: #b7d6a6; box-shadow: 0 3px 12px #23344a08; }
+.module-icon {
+  flex: 0 0 52px;
+  height: 52px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+}
+.module-info { flex: 1; min-width: 0; }
+.module-info strong { display: block; font-size: 15px; }
+.module-info p { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
+.module-meta {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: 9px;
+}
+.module-arrow { font-size: 23px; color: #a2adba; }
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 25px 0;
+}
+.info-tile {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 16px;
+}
+.info-tile span { font-size: 23px; }
+.info-tile strong { display: block; font-size: 13px; margin-top: 8px; }
+.info-tile p { color: var(--muted); font-size: 12px; margin: 4px 0 0; }
+.page-heading { margin: 5px 0 22px; }
+.page-heading h1 { margin: 8px 0; font-size: 29px; letter-spacing: -.7px; }
+.page-heading p { color: var(--muted); margin: 0; }
+.panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin-bottom: 16px;
+}
+.panel h2 { font-size: 19px; margin: 0 0 10px; }
+.panel p { color: var(--muted); }
+.search {
+  width: 100%;
+  border: 1px solid #dbe2e9;
+  border-radius: 12px;
+  padding: 13px 14px;
+  background: white;
+  color: var(--ink);
+  margin: 8px 0 14px;
+}
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.filter-btn {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 8px 12px;
+  color: #637185;
+  font-size: 12px;
+  font-weight: 750;
+}
+.filter-btn.active { background: var(--green-soft); color: var(--green-dark); border-color: #cde5bd; }
+.dictionary-item {
+  padding: 17px 0;
+  border-bottom: 1px solid #edf0f3;
+}
+.dictionary-item:last-child { border-bottom: 0; }
+.dict-top { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
+.dict-word { font-size: 17px; font-weight: 850; }
+.dict-translation { margin: 4px 0; }
+.dict-example { font-size: 13px; color: #5e7c50; margin: 8px 0; }
+.audio-btn {
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 10px;
+  padding: 7px 10px;
+  color: #52657a;
+}
+.category-label { font-size: 10px; font-weight: 850; color: #738197; text-transform: uppercase; }
+#lessonScreen { max-width: 790px; margin: auto; padding: 25px 22px 60px; }
+.lesson-header { display: flex; align-items: center; gap: 13px; margin-bottom: 32px; }
+.close-btn { border: 0; background: transparent; color: #7c8999; font-size: 25px; padding: 4px 8px; }
+.lesson-bar { flex: 1; height: 7px; border-radius: 10px; background: #e8edf1; overflow: hidden; }
+.lesson-bar div { height: 100%; background: var(--green); width: 0; transition: width .2s; }
+.lesson-count { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.question-type { color: var(--green-dark); font-size: 11px; font-weight: 850; letter-spacing: 1.2px; text-transform: uppercase; }
+.question-title { font-size: clamp(23px, 4vw, 30px); line-height: 1.3; letter-spacing: -.5px; margin: 12px 0; }
+.question-instruction { color: var(--muted); margin: 0 0 23px; }
+.prompt-card {
+  background: #f2f7ed;
+  border: 1px solid #dcebd3;
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+.prompt-german { font-size: 24px; font-weight: 850; line-height: 1.4; }
+.prompt-translation { color: #657a5a; margin-top: 9px; }
+.prompt-context { color: #657a5a; font-size: 13px; margin-top: 10px; }
+.answer-list { display: grid; gap: 11px; }
+.answer-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1.5px solid #dfe5eb;
+  background: white;
+  color: var(--ink);
+  border-radius: 13px;
+  padding: 14px;
+  text-align: left;
+  line-height: 1.5;
+}
+.answer-option:hover:not(:disabled) { border-color: #a6b9c8; background: #fbfcfe; }
+.answer-option.selected { background: var(--blue-soft); border-color: var(--blue); }
+.answer-option.correct { background: #eff8e9; border-color: #7eb55e; }
+.answer-option.incorrect { background: var(--red-soft); border-color: #d87a81; }
+.option-letter {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #dfe5eb;
+  border-radius: 8px;
+  font-weight: 850;
+  color: #64758a;
+}
+.answer-option.correct .option-letter { background: var(--green); color: white; border-color: var(--green); }
+.answer-option.incorrect .option-letter { background: var(--red); color: white; border-color: var(--red); }
+.feedback {
+  padding: 18px;
+  border-radius: 14px;
+  margin-top: 18px;
+  line-height: 1.65;
+}
+.feedback.good { background: #eff8e9; border: 1px solid #d6e9c9; }
+.feedback.bad { background: #fff5ed; border: 1px solid #f1ddcb; }
+.feedback h3 { margin: 0 0 8px; font-size: 17px; }
+.feedback p { margin: 8px 0; }
+.feedback .explain { color: #46566a; }
+.feedback .why { color: #647185; font-size: 13px; }
+.lesson-footer {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.lesson-footer button { min-width: 145px; }
+.completion { text-align: center; padding: 35px 10px; }
+.completion-icon { font-size: 65px; }
+.completion h1 { font-size: 30px; }
+.completion p { color: var(--muted); line-height: 1.7; }
+.interview-item {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.interview-item summary { padding: 17px; cursor: pointer; font-weight: 800; line-height: 1.6; }
+.interview-item summary:hover { background: #fafcf8; }
+.interview-body { padding: 0 17px 17px; }
+.interview-body p { line-height: 1.7; }
+.model-answer { background: #f1f7ed; padding: 15px; border-radius: 12px; }
+.model-answer p { color: #455c3b; margin-bottom: 0; }
+.example-label { color: var(--green-dark); font-size: 11px; font-weight: 850; letter-spacing: .8px; }
+.call-dialogue { display: grid; gap: 12px; }
+.dialogue-line { padding: 15px; border: 1px solid var(--border); border-radius: 13px; }
+.dialogue-line.agent { background: #f0f7ea; border-color: #dcebd3; }
+.dialogue-line.customer { background: #f2f6fb; }
+.dialogue-line strong { display: block; font-size: 12px; margin-bottom: 5px; }
+.dialogue-line p { margin: 4px 0; }
+.call-note { background: #fff8e9; border: 1px solid #f0e3c5; border-radius: 13px; padding: 16px; margin-top: 16px; }
+.call-note strong { color: #92661c; }
+.call-note p { color: #79694e; margin-bottom: 0; }
+.empty-state { padding: 25px; text-align: center; color: var(--muted); }
+.bottom-nav { display: none; }
+@media(max-width: 900px) {
+  .app-layout { grid-template-columns: 190px minmax(0, 740px); gap: 18px; }
+}
+@media(max-width: 650px) {
+  .topbar { height: 62px; padding: 0 13px; }
+  .brand { font-size: 18px; gap: 7px; }
+  .brand-mark { width: 34px; height: 34px; font-size: 20px; }
+  .header-note { display: none; }
+  .app-layout { display: block; padding: 15px 12px 95px; }
+  .sidebar { display: none; }
+  .hero { padding: 22px 19px; }
+  .hero h1 { font-size: 29px; }
+  .hero-bottom { align-items: stretch; }
+  .hero-bottom .primary { width: 100%; }
+  .info-grid { grid-template-columns: 1fr; gap: 9px; }
+  .info-tile { display: flex; gap: 12px; align-items: center; padding: 12px; }
+  .info-tile strong { margin: 0; }
+  .info-tile p { margin: 2px 0 0; }
+  .module-card { gap: 11px; padding: 12px; }
+  .module-icon { flex-basis: 43px; height: 43px; font-size: 22px; }
+  .module-info strong { font-size: 14px; }
+  .module-info p { font-size: 12px; }
+  .module-arrow { font-size: 19px; }
+  .module-meta .pill { font-size: 10px; }
+  .section-heading h2 { font-size: 19px; }
+  .panel { padding: 17px; }
+  #lessonScreen { padding: 17px 13px 100px; }
+  .lesson-header { gap: 8px; margin-bottom: 28px; }
+  .question-title { font-size: 24px; }
+  .prompt-card { padding: 18px; }
+  .prompt-german { font-size: 22px; }
+  .answer-option { padding: 12px; gap: 10px; }
+  .lesson-footer { display: block; }
+  .lesson-footer button { width: 100%; margin-top: 9px; }
+  .bottom-nav {
+    position: fixed;
+    display: flex;
+    left: 0; right: 0; bottom: 0;
+    background: white;
+    border-top: 1px solid var(--border);
+    justify-content: space-around;
+    padding: 7px 2px calc(7px + env(safe-area-inset-bottom));
+    z-index: 25;
+  }
+  .bottom-nav button {
+    border: 0; background: transparent; color: #7b8998;
+    font-size: 10px; font-weight: 800; padding: 4px 7px;
+    min-width: 60px;
+  }
+  .bottom-nav button span { display: block; font-size: 21px; margin-bottom: 2px; }
+  .bottom-nav button.active { color: var(--green-dark); }
+}
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">D</div> DeutschQuest</div>
+  <div class="header-note">Deutsch für Kundenservice · Deutsch–Shqip</div>
+</header>
+
+<div class="app-layout" id="appLayout">
+  <aside class="sidebar">
+    <div class="nav-label">MËSIMI</div>
+    <button class="nav-btn active" data-page="home"><span class="nav-icon">⌂</span> Mësimet</button>
+    <button class="nav-btn" data-page="dictionary"><span class="nav-icon">▤</span> Fjalori</button>
+    <button class="nav-btn" data-page="practice"><span class="nav-icon">☎</span> Bisedat praktike</button>
+    <button class="nav-btn" data-page="interview"><span class="nav-icon">▣</span> Intervista</button>
+    <div class="sidebar-note">
+      <strong>🎯 Qëllimi yt</strong>
+      <p>Mëso shprehje profesionale dhe kupto pse përdoren. Praktikoji me zë përpara një interviste.</p>
+    </div>
+  </aside>
+
+  <main id="content"></main>
+</div>
+
+<section id="lessonScreen" class="hidden">
+  <div class="lesson-header">
+    <button id="closeLesson" class="close-btn" aria-label="Mbyll mësimin">×</button>
+    <div class="lesson-bar"><div id="lessonBarFill"></div></div>
+    <span class="lesson-count" id="lessonCount"></span>
+  </div>
+  <div id="questionArea"></div>
+</section>
+
+<nav class="bottom-nav" aria-label="Navigimi kryesor">
+  <button class="active" data-page="home"><span>⌂</span>Mësimet</button>
+  <button data-page="dictionary"><span>▤</span>Fjalori</button>
+  <button data-page="practice"><span>☎</span>Bisedat</button>
+  <button data-page="interview"><span>▣</span>Intervista</button>
+</nav>
+
+<script>
+"use strict";
+
+/* =====================================================
+   PYETJET
+   Çdo pyetje e ka përgjigjen e saktë të shënuar veçmas.
+   Alternativat mund të përzihen pa prishur kontrollin.
+===================================================== */
+const modules = [
+{
+ id:"basics", title:"Bazat e Kundenservice",
+ subtitle:"Përshëndetje, mirësjellje dhe telefonata",
+ icon:"👋", color:"#e4f2ff", level:"A2",
+ questions:[
+  {
+   prompt:"Cila është mënyra më profesionale për ta nisur një telefonatë me klientin?",
+   context:"Ti je agjenti që po e pranon telefonatën.",
+   options:[
+    "Guten Tag, wie kann ich Ihnen helfen?",
+    "Hallo, was willst du?",
+    "Ja, was gibt's?"
+   ],
+   correct:"Guten Tag, wie kann ich Ihnen helfen?",
+   translation:"Mirëdita, si mund t'ju ndihmoj?",
+   explanation:"Kjo është një hyrje e sjellshme dhe profesionale. 'Ihnen' është forma formale e 'ju' në rasën dhanore. Në shërbimin ndaj klientit, zakonisht përdoret 'Sie/Ihnen', përveç nëse kompania ka një stil komunikimi joformal.",
+   distractors:{
+    "Hallo, was willst du?":"'Du' është joformale, ndërsa 'was willst du?' mund të tingëllojë e vrazhdë ndaj një klienti të panjohur.",
+    "Ja, was gibt's?":"Është bisedore dhe mund të tingëllojë tepër e drejtpërdrejtë për një përshëndetje profesionale."
+   }
+  },
+  {
+   prompt:"Klienti të kërkon ta presë për pak. Çfarë thua kur duhet të kontrollosh një informacion?",
+   context:"Duhet ta kontrollosh llogarinë para se të përgjigjesh.",
+   options:[
+    "Einen Moment bitte, ich prüfe das für Sie.",
+    "Warten. Ich weiß es nicht.",
+    "Rufen Sie später wieder an."
+   ],
+   correct:"Einen Moment bitte, ich prüfe das für Sie.",
+   translation:"Një moment, ju lutem, po e kontrolloj për ju.",
+   explanation:"Fjalia e informon klientin se çfarë po bën. 'Ich prüfe das für Sie' tregon se po e kontrollon çështjen në interes të klientit.",
+   distractors:{
+    "Warten. Ich weiß es nicht.":"Është e prerë dhe nuk e informon klientin se çfarë do të bësh për ta zgjidhur çështjen.",
+    "Rufen Sie später wieder an.":"E dërgon klientin të telefonojë përsëri pa kontrolluar nëse kjo është e nevojshme."
+   }
+  },
+  {
+   prompt:"Cila formë përdoret zakonisht për t'iu drejtuar me mirësjellje një klienti?",
+   context:"Zgjidh fjalën që plotëson fjalinë: 'Kann ich ___ helfen?'",
+   options:["dir","Ihnen","du"],
+   correct:"Ihnen",
+   translation:"A mund t'ju ndihmoj?",
+   explanation:"Folja 'helfen' kërkon rasën dhanore. Forma formale është 'Ihnen': 'Kann ich Ihnen helfen?'",
+   distractors:{
+    "dir":"'Dir' është forma joformale e dhanore për 'du'.",
+    "du":"'Du' është përemër i rasës emërore dhe nuk përshtatet pas 'helfen' në këtë fjali."
+   }
+  },
+  {
+   prompt:"Nuk e ke kuptuar një pjesë të asaj që tha klienti. Si kërkon përsëritje?",
+   options:[
+    "Könnten Sie das bitte wiederholen?",
+    "Was? Sprechen Sie richtig!",
+    "Ich habe nicht zugehört."
+   ],
+   correct:"Könnten Sie das bitte wiederholen?",
+   translation:"A mund ta përsërisni këtë, ju lutem?",
+   explanation:"'Könnten Sie ... bitte?' është mënyrë e sjellshme për të kërkuar diçka. Është e pranueshme të kërkosh sqarim kur nuk e ke kuptuar informacionin.",
+   distractors:{
+    "Was? Sprechen Sie richtig!":"Tingëllon akuzuese dhe mund ta bëjë klientin të ndihet i kritikuar.",
+    "Ich habe nicht zugehört.":"'Nuk kam dëgjuar' mund të lërë përshtypjen se nuk i ke kushtuar vëmendje klientit."
+   }
+  },
+  {
+   prompt:"Cila shprehje është më e përshtatshme për ta mbyllur një telefonatë?",
+   options:[
+    "Vielen Dank für Ihren Anruf. Auf Wiederhören!",
+    "Okay, tschüss.",
+    "So, fertig. Weg damit."
+   ],
+   correct:"Vielen Dank für Ihren Anruf. Auf Wiederhören!",
+   translation:"Faleminderit për telefonatën. Mirë u dëgjofshim!",
+   explanation:"'Auf Wiederhören' përdoret për përfundimin e telefonatave. Falënderimi dhe përshëndetja përfundimtare krijojnë një përshtypje profesionale.",
+   distractors:{
+    "Okay, tschüss.":"'Tschüss' është i zakonshëm në biseda joformale, por kjo fjali nuk është zgjedhja më profesionale për klientë të panjohur.",
+    "So, fertig. Weg damit.":"Është e vrazhdë dhe e papërshtatshme në komunikimin me klientë."
+   }
+  }
+ ]
+},
+{
+ id:"communication", title:"Komunikimi me klientin",
+ subtitle:"Pyetje, sqarime dhe dëgjim aktiv",
+ icon:"🎧", color:"#eee7ff", level:"A2–B1",
+ questions:[
+  {
+   prompt:"Si pyet për numrin e klientit?",
+   options:[
+    "Wie lautet Ihre Kundennummer?",
+    "Wie ist Ihr Passwort?",
+    "Wie viel verdienen Sie?"
+   ],
+   correct:"Wie lautet Ihre Kundennummer?",
+   translation:"Cili është numri juaj i klientit?",
+   explanation:"'Kundennummer' është numri identifikues i klientit. Kërko vetëm të dhënat që nevojiten sipas procedurës së kompanisë.",
+   distractors:{
+    "Wie ist Ihr Passwort?":"Fjalëkalimi është informacion shumë i ndjeshëm dhe zakonisht nuk duhet kërkuar nga agjenti.",
+    "Wie viel verdienen Sie?":"Kjo pyet për të ardhurat personale dhe nuk lidhet me identifikimin standard të klientit."
+   }
+  },
+  {
+   prompt:"Klienti thotë: 'Ich habe eine Frage.' Çfarë do të thotë?",
+   options:["Kam një ankesë.","Kam një pyetje.","Kam një takim."],
+   correct:"Kam një pyetje.",
+   translation:"Ich habe eine Frage.",
+   explanation:"'Die Frage' do të thotë pyetje. Për ankesë përdoret 'die Beschwerde'; për takim, 'der Termin'.",
+   distractors:{
+    "Kam një ankesë.":"'Ankesë' përkthehet 'Beschwerde'.",
+    "Kam një takim.":"'Takim' përkthehet 'Termin'."
+   }
+  },
+  {
+   prompt:"Si e përmbledh kërkesën për të konfirmuar se e ke kuptuar klientin?",
+   options:[
+    "Wenn ich Sie richtig verstehe, möchten Sie ...",
+    "Sie verstehen mich nicht.",
+    "Das habe ich nicht gefragt."
+   ],
+   correct:"Wenn ich Sie richtig verstehe, möchten Sie ...",
+   translation:"Nëse ju kuptova saktë, ju dëshironi ...",
+   explanation:"Kjo shprehje është e dobishme për dëgjim aktiv. Pas saj, përmblidhe kërkesën me fjalët e tua dhe pyete klientin nëse e ke kuptuar saktë.",
+   distractors:{
+    "Sie verstehen mich nicht.":"Kjo do të thotë 'Ju nuk më kuptoni' dhe e zhvendos fajin te klienti.",
+    "Das habe ich nicht gefragt.":"Kjo do të thotë 'Nuk e pyeta këtë' dhe nuk e konfirmon kërkesën."
+   }
+  },
+  {
+   prompt:"Klienti flet shpejt dhe nuk arrin t'i kuptosh të gjitha. Cila kërkesë është e përshtatshme?",
+   options:[
+    "Könnten Sie bitte etwas langsamer sprechen?",
+    "Sprechen Sie endlich normal!",
+    "Ich verstehe gar nichts, tschüss."
+   ],
+   correct:"Könnten Sie bitte etwas langsamer sprechen?",
+   translation:"A mund të flisni pak më ngadalë, ju lutem?",
+   explanation:"Është më mirë të kërkosh qartë dhe me mirësjellje një ritëm më të ngadaltë sesa të hamendësosh informacionin.",
+   distractors:{
+    "Sprechen Sie endlich normal!":"Tingëllon urdhëruese dhe fyese.",
+    "Ich verstehe gar nichts, tschüss.":"E ndërpret bisedën pa u përpjekur të sqarosh informacionin."
+   }
+  },
+  {
+   prompt:"Cila fjali është më e përshtatshme kur ke nevojë për më shumë informacion?",
+   options:[
+    "Könnten Sie mir bitte weitere Informationen geben?",
+    "Warum haben Sie das nicht gesagt?",
+    "Das ist mir egal."
+   ],
+   correct:"Könnten Sie mir bitte weitere Informationen geben?",
+   translation:"A mund të më jepni më shumë informacion, ju lutem?",
+   explanation:"'Weitere Informationen' do të thotë informacion shtesë. Kjo kërkesë është e sjellshme dhe të ndihmon ta kuptosh rastin para se të japësh zgjidhje.",
+   distractors:{
+    "Warum haben Sie das nicht gesagt?":"Tingëllon si qortim dhe mund ta bëjë klientin mbrojtës.",
+    "Das ist mir egal.":"'Nuk më intereson' është e papranueshme në shërbimin ndaj klientit."
+   }
+  }
+ ]
+},
+{
+ id:"complaints", title:"Ankesat dhe klientët e vështirë",
+ subtitle:"Empati, qetësi dhe zgjidhje",
+ icon:"🤝", color:"#ffeadf", level:"B1",
+ questions:[
+  {
+   prompt:"Klienti ankohet për një gabim në shërbim. Si shpreh keqardhje në mënyrë profesionale?",
+   options:[
+    "Es tut mir leid, dass dieses Problem aufgetreten ist.",
+    "Das ist nicht mein Problem.",
+    "Sie haben bestimmt etwas falsch gemacht."
+   ],
+   correct:"Es tut mir leid, dass dieses Problem aufgetreten ist.",
+   translation:"Më vjen keq që ka ndodhur ky problem.",
+   explanation:"Kjo shprehje njeh shqetësimin e klientit pa e fajësuar atë. Pas kërkimit të faljes, shpjego hapat konkretë që mund të ndërmarrësh.",
+   distractors:{
+    "Das ist nicht mein Problem.":"E largon përgjegjësinë pa ofruar ndihmë.",
+    "Sie haben bestimmt etwas falsch gemacht.":"E fajëson klientin pa i kontrolluar faktet."
+   }
+  },
+  {
+   prompt:"Klienti është i zemëruar për një vonesë. Cila përgjigje është më profesionale?",
+   options:[
+    "Ich verstehe, dass Sie verärgert sind. Ich prüfe den aktuellen Stand.",
+    "Beruhigen Sie sich sofort!",
+    "Dafür kann ich nichts."
+   ],
+   correct:"Ich verstehe, dass Sie verärgert sind. Ich prüfe den aktuellen Stand.",
+   translation:"E kuptoj që jeni i/e zemëruar. Po kontrolloj gjendjen aktuale.",
+   explanation:"Përgjigjja njeh emocionin e klientit dhe tregon veprimin që do të ndërmarrësh. Mos premto zgjidhje ose afate që nuk i ke verifikuar.",
+   distractors:{
+    "Beruhigen Sie sich sofort!":"Urdhri për t'u qetësuar mund ta përshkallëzojë konfliktin.",
+    "Dafür kann ich nichts.":"'Nuk mund të bëj asgjë për këtë' e mbyll mundësinë e ndihmës."
+   }
+  },
+  {
+   prompt:"Çfarë do të thotë 'Ich kümmere mich darum'?",
+   options:[
+    "Do të merrem me këtë.",
+    "Nuk është puna ime.",
+    "Problemi është zgjidhur tashmë."
+   ],
+   correct:"Do të merrem me këtë.",
+   translation:"Ich kümmere mich darum.",
+   explanation:"Kjo shprehje tregon se do të merresh me çështjen. Ajo nuk do të thotë se problemi është zgjidhur; duhet t'i ndjekësh hapat e premtuar.",
+   distractors:{
+    "Nuk është puna ime.":"Është e kundërta e kuptimit të shprehjes.",
+    "Problemi është zgjidhur tashmë.":"'Das Problem wurde bereits gelöst' do të thotë se problemi është zgjidhur."
+   }
+  },
+  {
+   prompt:"Duhet ta përcjellësh ankesën te një ekip tjetër. Çfarë i thua klientit?",
+   options:[
+    "Ich leite Ihren Fall an die zuständige Abteilung weiter.",
+    "Ich schicke Sie einfach weg.",
+    "Fragen Sie jemand anderen."
+   ],
+   correct:"Ich leite Ihren Fall an die zuständige Abteilung weiter.",
+   translation:"Do ta përcjell rastin tuaj te departamenti përgjegjës.",
+   explanation:"'Weiterleiten' do të thotë përcjellje; 'zuständige Abteilung' është departamenti që merret me atë çështje. Ndiq procedurën e kompanisë dhe shpjego çfarë ndodh më pas.",
+   distractors:{
+    "Ich schicke Sie einfach weg.":"Tingëllon shpërfillëse dhe nuk shpjegon procedurën.",
+    "Fragen Sie jemand anderen.":"'Pyetni dikë tjetër' e përcjell përgjegjësinë pa ndihmë."
+   }
+  },
+  {
+   prompt:"Nuk mund ta zgjidhësh menjëherë problemin. Cila fjali është e përshtatshme?",
+   options:[
+    "Ich prüfe die Möglichkeiten und informiere Sie über die nächsten Schritte.",
+    "Ich verspreche, dass alles in fünf Minuten erledigt ist.",
+    "Sie müssen einfach warten."
+   ],
+   correct:"Ich prüfe die Möglichkeiten und informiere Sie über die nächsten Schritte.",
+   translation:"Do t'i kontrolloj mundësitë dhe do t'ju informoj për hapat e ardhshëm.",
+   explanation:"Kjo shprehje është e ndershme: shpjegon veprimin pa premtuar një rezultat ose afat të pakonfirmuar.",
+   distractors:{
+    "Ich verspreche, dass alles in fünf Minuten erledigt ist.":"Premton një afat konkret pa e ditur nëse është i mundur.",
+    "Sie müssen einfach warten.":"Nuk jep shpjegim ose pritshmëri të qartë."
+   }
+  }
+ ]
+},
+{
+ id:"tickets", title:"Ticket-at, email-et dhe sistemet",
+ subtitle:"Dokumentim dhe komunikim me shkrim",
+ icon:"💻", color:"#e1f5ed", level:"B1",
+ questions:[
+  {
+   prompt:"Çfarë do të thotë 'ein Ticket erstellen' në një sistem si Zendesk?",
+   options:[
+    "Të krijosh një rast të dokumentuar në sistem.",
+    "Të fshish llogarinë e klientit.",
+    "Të anulosh automatikisht porosinë."
+   ],
+   correct:"Të krijosh një rast të dokumentuar në sistem.",
+   translation:"Ein Ticket erstellen.",
+   explanation:"Ticket-i regjistron kërkesën ose problemin, komunikimin dhe hapat e ndërmarrë. Përmbajtja duhet të jetë e saktë, e qartë dhe relevante.",
+   distractors:{
+    "Të fshish llogarinë e klientit.":"Kjo nuk është kuptimi i 'Ticket erstellen'.",
+    "Të anulosh automatikisht porosinë.":"Krijimi i ticket-it nuk e anulon automatikisht një porosi."
+   }
+  },
+  {
+   prompt:"Cila fjali është më e përshtatshme për një email profesional?",
+   options:[
+    "Vielen Dank für Ihre Nachricht. Wir prüfen Ihr Anliegen.",
+    "Hey, was gibt's?",
+    "Schick das nochmal, ich hab keine Zeit."
+   ],
+   correct:"Vielen Dank für Ihre Nachricht. Wir prüfen Ihr Anliegen.",
+   translation:"Faleminderit për mesazhin tuaj. Po e shqyrtojmë kërkesën tuaj.",
+   explanation:"Faleminderit për mesazhin dhe njoftimi për hapin e ardhshëm krijojnë një përgjigje të sjellshme. Përdor vetëm premtime që përputhen me procesin real.",
+   distractors:{
+    "Hey, was gibt's?":"Është tepër joformale për shumicën e email-eve të shërbimit ndaj klientit.",
+    "Schick das nochmal, ich hab keine Zeit.":"Tingëllon e pasjellshme dhe nuk jep udhëzim profesional."
+   }
+  },
+  {
+   prompt:"Çfarë do të thotë 'Das Problem wurde behoben'?",
+   options:[
+    "Problemi është zgjidhur.",
+    "Problemi është raportuar për herë të parë.",
+    "Problemi është përkeqësuar."
+   ],
+   correct:"Problemi është zgjidhur.",
+   translation:"Das Problem wurde behoben.",
+   explanation:"'Beheben' do të thotë të eliminosh një problem. 'Wurde behoben' është formë pasive në të kaluarën: problemi u zgjidh.",
+   distractors:{
+    "Problemi është raportuar për herë të parë.":"'U raportua' mund të thuhet 'wurde gemeldet'.",
+    "Problemi është përkeqësuar.":"'Përkeqësohet' përkthehet 'verschlimmert sich'."
+   }
+  },
+  {
+   prompt:"Çfarë do të thotë 'Rückmeldung'?",
+   options:[
+    "Përgjigje ose njoftim kthyes.",
+    "Fjalëkalim.",
+    "Faturë."
+   ],
+   correct:"Përgjigje ose njoftim kthyes.",
+   translation:"Die Rückmeldung.",
+   explanation:"Shembull: 'Sie erhalten morgen eine Rückmeldung.' — Do të merrni një përgjigje nesër. Jep afat vetëm nëse është konfirmuar.",
+   distractors:{
+    "Fjalëkalim.":"'Fjalëkalim' është 'Passwort'.",
+    "Faturë.":"'Faturë' është 'Rechnung'."
+   }
+  },
+  {
+   prompt:"Cila shënim është më i dobishëm në një ticket?",
+   options:[
+    "Kunde meldet eine fehlgeschlagene Zahlung. Fehlermeldung geprüft; weitere Prüfung erforderlich.",
+    "Kunde nervig. Keine Ahnung.",
+    "Alles kaputt."
+   ],
+   correct:"Kunde meldet eine fehlgeschlagene Zahlung. Fehlermeldung geprüft; weitere Prüfung erforderlich.",
+   translation:"Klienti raporton pagesë të dështuar. Mesazhi i gabimit u kontrollua; nevojitet shqyrtim i mëtejshëm.",
+   explanation:"Një shënim i mirë përshkruan faktet, kontrollet e kryera dhe hapin tjetër. Shmang komentet personale, hamendësimet dhe fjalët e paqarta.",
+   distractors:{
+    "Kunde nervig. Keine Ahnung.":"Është subjektive dhe nuk dokumenton problemin ose veprimet e ndërmarra.",
+    "Alles kaputt.":"'Gjithçka është prishur' është tepër e paqartë për një shënim profesional."
+   }
+  }
+ ]
+},
+{
+ id:"billing", title:"Pagesat, faturat dhe porositë",
+ subtitle:"Terminologji e përdorur në mbështetje",
+ icon:"💳", color:"#fff1d2", level:"B1",
+ questions:[
+  {
+   prompt:"Çfarë do të thotë 'die Rechnung'?",
+   options:["Fatura.","Porosia.","Adresa."],
+   correct:"Fatura.",
+   translation:"Die Rechnung.",
+   explanation:"'Rechnung' është faturë. 'Bestellung' është porosi dhe 'Adresse' është adresë.",
+   distractors:{
+    "Porosia.":"'Porosi' është 'die Bestellung'.",
+    "Adresa.":"'Adresë' është 'die Adresse'."
+   }
+  },
+  {
+   prompt:"Klienti pyet kur do të marrë paratë mbrapsht. Cili term i duhet?",
+   options:["die Rückerstattung","die Bewerbung","die Verbindung"],
+   correct:"die Rückerstattung",
+   translation:"Rimbursimi.",
+   explanation:"'Rückerstattung' është kthimi i parave. Mos jep datë të rimbursimit pa kontrolluar statusin dhe rregullat e kompanisë.",
+   distractors:{
+    "die Bewerbung":"'Bewerbung' do të thotë aplikim për punë.",
+    "die Verbindung":"'Verbindung' do të thotë lidhje, për shembull lidhje telefonike."
+   }
+  },
+  {
+   prompt:"Si pyet nëse klienti dëshiron të kontrolloni statusin e porosisë?",
+   options:[
+    "Möchten Sie, dass ich den Status Ihrer Bestellung überprüfe?",
+    "Möchten Sie Ihre Bestellung essen?",
+    "Warum haben Sie bestellt?"
+   ],
+   correct:"Möchten Sie, dass ich den Status Ihrer Bestellung überprüfe?",
+   translation:"Dëshironi që ta kontrolloj statusin e porosisë suaj?",
+   explanation:"'Bestellung' është porosi; 'Status überprüfen' është kontrollimi i statusit. Fjalia ofron një veprim konkret.",
+   distractors:{
+    "Möchten Sie Ihre Bestellung essen?":"Do të thotë 'Dëshironi ta hani porosinë tuaj?' dhe nuk ka kuptim në këtë kontekst.",
+    "Warum haben Sie bestellt?":"Do të thotë 'Pse keni porositur?' dhe nuk ndihmon në kontrollimin e statusit."
+   }
+  },
+  {
+   prompt:"Çfarë do të thotë 'Die Zahlung ist fehlgeschlagen'?",
+   options:[
+    "Pagesa ka dështuar.",
+    "Pagesa është konfirmuar.",
+    "Fatura është dërguar."
+   ],
+   correct:"Pagesa ka dështuar.",
+   translation:"Die Zahlung ist fehlgeschlagen.",
+   explanation:"'Zahlung' është pagesë dhe 'fehlgeschlagen' do të thotë ka dështuar. Kontrollo mesazhin e sistemit para se të sugjerosh hapa të mëtejshëm.",
+   distractors:{
+    "Pagesa është konfirmuar.":"'Konfirmuar' mund të shprehet me 'bestätigt'.",
+    "Fatura është dërguar.":"'Fatura është dërguar' është 'Die Rechnung wurde versendet'."
+   }
+  },
+  {
+   prompt:"Klienti thotë se porosia nuk ka ardhur. Cila pyetje është e dobishme?",
+   options:[
+    "Könnten Sie mir bitte Ihre Bestellnummer nennen?",
+    "Warum sind Sie so ungeduldig?",
+    "Haben Sie die Bestellung vergessen?"
+   ],
+   correct:"Könnten Sie mir bitte Ihre Bestellnummer nennen?",
+   translation:"A mund të më tregoni numrin e porosisë, ju lutem?",
+   explanation:"Numri i porosisë ndihmon për ta gjetur rastin. Kërko vetëm të dhënat e nevojshme sipas procedurës së kompanisë.",
+   distractors:{
+    "Warum sind Sie so ungeduldig?":"E kritikon klientin në vend që të mbledhësh informacion për zgjidhje.",
+    "Haben Sie die Bestellung vergessen?":"Është pyetje akuzuese dhe nuk ndihmon në gjurmimin e dërgesës."
+   }
+  }
+ ]
+},
+{
+ id:"privacy", title:"Llogaritë, privatësia dhe siguria",
+ subtitle:"Verifikim dhe mbrojtje e të dhënave",
+ icon:"🔐", color:"#e4edff", level:"B1",
+ questions:[
+  {
+   prompt:"Çfarë duhet të bësh para se të tregosh të dhëna të një llogarie?",
+   options:[
+    "Të ndjekësh procedurën e verifikimit të identitetit të kompanisë.",
+    "T'i tregosh kujtdo që telefonon.",
+    "Të kërkosh fjalëkalimin e plotë të klientit."
+   ],
+   correct:"Të ndjekësh procedurën e verifikimit të identitetit të kompanisë.",
+   translation:"Die Identität gemäß dem Unternehmensprozess überprüfen.",
+   explanation:"Verifikimi duhet të bëhet sipas procedurës dhe rregullave të privatësisë së kompanisë. Mos zbulo të dhëna vetëm sepse telefonuesi e kërkon.",
+   distractors:{
+    "T'i tregosh kujtdo që telefonon.":"Telefonuesi mund të mos jetë pronari i llogarisë.",
+    "Të kërkosh fjalëkalimin e plotë të klientit.":"Fjalëkalimet e plota nuk duhen kërkuar në mënyrë të zakonshme nga agjentët."
+   }
+  },
+  {
+   prompt:"Klienti të pyet për fjalëkalimin e vet të harruar. Cila përgjigje është më e sigurt?",
+   options:[
+    "Ich kann Ihnen erklären, wie Sie Ihr Passwort sicher zurücksetzen.",
+    "Sagen Sie mir Ihr Passwort, dann prüfe ich es.",
+    "Ich sende Ihr Passwort an meine private E-Mail."
+   ],
+   correct:"Ich kann Ihnen erklären, wie Sie Ihr Passwort sicher zurücksetzen.",
+   translation:"Mund t'ju shpjegoj si ta rivendosni fjalëkalimin në mënyrë të sigurt.",
+   explanation:"Përdor procedurën zyrtare të rivendosjes së fjalëkalimit. Mos kërko ose dërgo fjalëkalime përmes kanaleve të pasigurta.",
+   distractors:{
+    "Sagen Sie mir Ihr Passwort, dann prüfe ich es.":"Nuk është e sigurt t'i kërkosh klientit fjalëkalimin.",
+    "Ich sende Ihr Passwort an meine private E-Mail.":"Dërgimi në email personal është i pasigurt dhe i papërshtatshëm."
+   }
+  },
+  {
+   prompt:"Çfarë do të thotë 'Ich muss Ihre Angaben überprüfen'?",
+   options:[
+    "Duhet t'i kontrolloj të dhënat tuaja.",
+    "Duhet t'i fshij të dhënat tuaja.",
+    "Duhet t'i publikoj të dhënat tuaja."
+   ],
+   correct:"Duhet t'i kontrolloj të dhënat tuaja.",
+   translation:"Ich muss Ihre Angaben überprüfen.",
+   explanation:"'Angaben' janë të dhënat ose informacionet e dhëna. Kontrollo vetëm informacionin e nevojshëm për qëllimin e shërbimit.",
+   distractors:{
+    "Duhet t'i fshij të dhënat tuaja.":"'Fshij' është 'löschen'.",
+    "Duhet t'i publikoj të dhënat tuaja.":"'Publikoj' është 'veröffentlichen'."
+   }
+  },
+  {
+   prompt:"Si reagon kur një person i paautorizuar kërkon të dhëna konfidenciale?",
+   options:[
+    "Ich darf diese Informationen ohne entsprechende Berechtigung nicht weitergeben.",
+    "Natürlich, ich sage Ihnen alles.",
+    "Ich schicke Ihnen die Daten über meinen privaten Account."
+   ],
+   correct:"Ich darf diese Informationen ohne entsprechende Berechtigung nicht weitergeben.",
+   translation:"Nuk mund t'i përcjell këto informacione pa autorizimin përkatës.",
+   explanation:"Të dhënat konfidenciale duhen mbrojtur. Ndiq procedurat e autorizimit dhe të përshkallëzimit të kompanisë.",
+   distractors:{
+    "Natürlich, ich sage Ihnen alles.":"'Sigurisht, ju tregoj gjithçka' shpërfill privatësinë.",
+    "Ich schicke Ihnen die Daten über meinen privaten Account.":"Përdorimi i një llogarie personale për dërgimin e të dhënave të punës mund të krijojë rrezik sigurie."
+   }
+  }
+ ]
+},
+{
+ id:"interview", title:"Intervista e punës",
+ subtitle:"Pyetjet tipike dhe përgjigjet profesionale",
+ icon:"💼", color:"#ffe6ee", level:"B1–B2",
+ questions:[
+  {
+   prompt:"Intervistuesi pyet: 'Erzählen Sie etwas über sich.' Cila përgjigje është një fillim i mirë?",
+   options:[
+    "Ich habe Erfahrung im Kundenservice und arbeite gern mit Menschen.",
+    "Ich brauche irgendeinen Job, egal welchen.",
+    "Ich weiß nicht, was ich sagen soll."
+   ],
+   correct:"Ich habe Erfahrung im Kundenservice und arbeite gern mit Menschen.",
+   translation:"Kam përvojë në shërbimin ndaj klientit dhe më pëlqen të punoj me njerëz.",
+   explanation:"Një prezantim i mirë është i shkurtër dhe lidhet me punën. Shto përvojën tënde reale, gjuhët dhe aftësitë. Mos pretendo përvojë që nuk e ke.",
+   distractors:{
+    "Ich brauche irgendeinen Job, egal welchen.":"Nuk tregon pse je i përshtatshëm për këtë pozitë.",
+    "Ich weiß nicht, was ich sagen soll.":"Nuk të prezanton profesionalisht, edhe nëse je nervoz."
+   }
+  },
+  {
+   prompt:"Çfarë do të thotë 'Was sind Ihre Stärken?'?",
+   options:[
+    "Cilat janë pikat tuaja të forta?",
+    "Cila është adresa juaj?",
+    "Kur mund të filloni pushimet?"
+   ],
+   correct:"Cilat janë pikat tuaja të forta?",
+   translation:"Was sind Ihre Stärken?",
+   explanation:"Mund të përgjigjesh me dy ose tri aftësi konkrete, si 'Geduld', 'Zuverlässigkeit' ose 'Kommunikationsfähigkeit', dhe t'i ilustrosh me shembuj.",
+   distractors:{
+    "Cila është adresa juaj?":"'Adresa juaj' është 'Ihre Adresse'.",
+    "Kur mund të filloni pushimet?":"'Pushimet' janë 'Urlaub'."
+   }
+  },
+  {
+   prompt:"Si e përshkruan një mënyrë të orientuar drejt zgjidhjes?",
+   options:[
+    "Ich suche nach einer passenden Lösung.",
+    "Ich ignoriere schwierige Probleme.",
+    "Ich gebe die Schuld immer anderen."
+   ],
+   correct:"Ich suche nach einer passenden Lösung.",
+   translation:"Kërkoj një zgjidhje të përshtatshme.",
+   explanation:"Kjo përgjigje tregon fokus te zgjidhja. Në intervistë, mund ta shoqërosh me një shembull real të një problemi që ke zgjidhur.",
+   distractors:{
+    "Ich ignoriere schwierige Probleme.":"'I injoroj problemet e vështira' tregon shmangie të përgjegjësisë.",
+    "Ich gebe die Schuld immer anderen.":"'Gjithmonë ua hedh fajin të tjerëve' nuk tregon bashkëpunim."
+   }
+  },
+  {
+   prompt:"Intervistuesi pyet si sillesh me klientët e zemëruar. Cila përgjigje është e përshtatshme?",
+   options:[
+    "Ich bleibe ruhig, höre aufmerksam zu und suche eine Lösung.",
+    "Ich diskutiere, bis der Kunde aufgibt.",
+    "Ich beende sofort jedes schwierige Gespräch."
+   ],
+   correct:"Ich bleibe ruhig, höre aufmerksam zu und suche eine Lösung.",
+   translation:"Qëndroj i qetë, dëgjoj me vëmendje dhe kërkoj një zgjidhje.",
+   explanation:"Kjo përfshin tri aftësi kyçe: vetëkontrollin, dëgjimin aktiv dhe zgjidhjen e problemeve. Një shembull konkret do ta forconte përgjigjen.",
+   distractors:{
+    "Ich diskutiere, bis der Kunde aufgibt.":"'Debatoj derisa klienti të dorëzohet' e përshkallëzon konfliktin.",
+    "Ich beende sofort jedes schwierige Gespräch.":"'I përfundoj menjëherë bisedat e vështira' shmang trajtimin e problemit."
+   }
+  },
+  {
+   prompt:"Nuk e di përgjigjen e një pyetjeje teknike gjatë punës. Si vepron?",
+   options:[
+    "Ich prüfe die verfügbaren Informationen oder frage die zuständige Abteilung.",
+    "Ich erfinde eine Antwort, damit der Kunde zufrieden ist.",
+    "Ich ignoriere die Frage."
+   ],
+   correct:"Ich prüfe die verfügbaren Informationen oder frage die zuständige Abteilung.",
+   translation:"Kontrolloj informacionin në dispozicion ose pyes departamentin përgjegjës.",
+   explanation:"Është më profesionale të verifikosh sesa të japësh informacion të pasaktë. Në intervistë, kjo tregon përgjegjësi dhe gatishmëri për të mësuar.",
+   distractors:{
+    "Ich erfinde eine Antwort, damit der Kunde zufrieden ist.":"'E shpik një përgjigje' mund ta çojë klientin drejt informacionit të gabuar.",
+    "Ich ignoriere die Frage.":"'E injoroj pyetjen' nuk e trajton kërkesën e klientit."
+   }
+  }
+ ]
+},
+{
+ id:"advanced", title:"Gjermanishtja profesionale B2",
+ subtitle:"Formulime më të avancuara për klientët",
+ icon:"🗣️", color:"#e6f1ff", level:"B1–B2",
+ questions:[
+  {
+   prompt:"Cila shprehje është më e përshtatshme për të kërkuar kohë për shqyrtim?",
+   options:[
+    "Damit ich Ihnen eine korrekte Auskunft geben kann, prüfe ich den Sachverhalt.",
+    "Ich sage einfach irgendetwas.",
+    "Ich habe keine Lust, das zu prüfen."
+   ],
+   correct:"Damit ich Ihnen eine korrekte Auskunft geben kann, prüfe ich den Sachverhalt.",
+   translation:"Që t'ju jap informacion të saktë, po e shqyrtoj rastin.",
+   explanation:"'Auskunft' do të thotë informacion ose sqarim; 'Sachverhalt' është gjendja e fakteve të rastit. Ky formulim është i përshtatshëm kur duhet verifikim.",
+   distractors:{
+    "Ich sage einfach irgendetwas.":"'Thjesht them diçka' nënkupton se informacioni nuk është i verifikuar.",
+    "Ich habe keine Lust, das zu prüfen.":"'Nuk kam dëshirë ta kontrolloj' është jo-profesionale."
+   }
+  },
+  {
+   prompt:"Si e njofton klientin se kërkesa është ende në shqyrtim?",
+   options:[
+    "Ihre Anfrage wird derzeit bearbeitet.",
+    "Ihre Anfrage ist verschwunden.",
+    "Niemand kümmert sich darum."
+   ],
+   correct:"Ihre Anfrage wird derzeit bearbeitet.",
+   translation:"Kërkesa juaj po trajtohet aktualisht.",
+   explanation:"'Derzeit' do të thotë aktualisht dhe 'bearbeitet' do të thotë po trajtohet. Përdore vetëm nëse statusi i sistemit e konfirmon këtë.",
+   distractors:{
+    "Ihre Anfrage ist verschwunden.":"'Kërkesa juaj është zhdukur' jep informacion tjetër dhe alarmues.",
+    "Niemand kümmert sich darum.":"'Askush nuk po merret me të' është pretendim i papërshtatshëm pa fakte."
+   }
+  },
+  {
+   prompt:"Cila shprehje e sqaron një kufizim pa qenë e vrazhdë?",
+   options:[
+    "Leider ist diese Änderung unter den aktuellen Bedingungen nicht möglich. Ich prüfe gern die Alternativen.",
+    "Nein. Geht nicht.",
+    "Das müssen Sie selbst herausfinden."
+   ],
+   correct:"Leider ist diese Änderung unter den aktuellen Bedingungen nicht möglich. Ich prüfe gern die Alternativen.",
+   translation:"Fatkeqësisht, ky ndryshim nuk është i mundur në kushtet aktuale. Me kënaqësi do t'i kontrolloj alternativat.",
+   explanation:"Shpjego kufizimin qartë dhe ofro alternativa reale kur ekzistojnë. Mos premto përjashtime që kompania nuk i lejon.",
+   distractors:{
+    "Nein. Geht nicht.":"'Jo, nuk bëhet' është tepër e shkurtër dhe nuk ofron sqarim.",
+    "Das müssen Sie selbst herausfinden.":"'Duhet ta zbuloni vetë' e lë klientin pa ndihmë."
+   }
+  },
+  {
+   prompt:"Çfarë do të thotë 'Ich möchte sicherstellen, dass ich Sie richtig verstanden habe'?",
+   options:[
+    "Dua të sigurohem se ju kam kuptuar saktë.",
+    "Dua të sigurohem se ju kam telefonuar.",
+    "Dua ta mbyll bisedën."
+   ],
+   correct:"Dua të sigurohem se ju kam kuptuar saktë.",
+   translation:"Ich möchte sicherstellen, dass ich Sie richtig verstanden habe.",
+   explanation:"'Sicherstellen' do të thotë të sigurohesh. Kjo fjali përdoret për të konfirmuar kërkesën para se të veprosh.",
+   distractors:{
+    "Dua të sigurohem se ju kam telefonuar.":"'Ju kam telefonuar' do të ishte 'Ich habe Sie angerufen'.",
+    "Dua ta mbyll bisedën.":"'Ta mbyll bisedën' mund të shprehet si 'das Gespräch beenden'."
+   }
+  }
+ ]
+}
+];
+
+/* =====================================================
+   FJALOR I ZGJERUAR
+   Gjermanisht, shqip, shembull dhe kategori.
+===================================================== */
+const dictionary = [
+["der Kundenservice","shërbimi ndaj klientit","Ich arbeite im Kundenservice.","Bazat"],
+["der Kunde / die Kundin","klienti / klientja","Der Kunde hat eine Frage.","Bazat"],
+["das Kundengespräch","biseda me klientin","Das Kundengespräch war freundlich.","Bazat"],
+["die Begrüßung","përshëndetja","Beginnen Sie mit einer höflichen Begrüßung.","Bazat"],
+["die Verabschiedung","përshëndetja e fundit","Bedanken Sie sich bei der Verabschiedung.","Bazat"],
+["die Höflichkeit","mirësjellja","Höflichkeit ist im Kundenservice wichtig.","Bazat"],
+["die Anrede","forma e adresimit","Verwenden Sie die passende Anrede.","Bazat"],
+["die Auskunft","informacioni / sqarimi","Ich gebe Ihnen gern eine Auskunft.","Bazat"],
+["das Anliegen","kërkesa / çështja e klientit","Ich kümmere mich um Ihr Anliegen.","Komunikimi"],
+["die Anfrage","kërkesa / pyetja","Wir haben Ihre Anfrage erhalten.","Komunikimi"],
+["die Rückfrage","pyetje sqaruese","Ich habe eine kurze Rückfrage.","Komunikimi"],
+["die Erklärung","shpjegimi","Vielen Dank für Ihre Erklärung.","Komunikimi"],
+["die Information","informacioni","Ich prüfe die Information.","Komunikimi"],
+["die Bestätigung","konfirmimi","Sie erhalten eine Bestätigung per E-Mail.","Komunikimi"],
+["die Rückmeldung","përgjigjja / njoftimi kthyes","Sie erhalten eine Rückmeldung.","Komunikimi"],
+["das Missverständnis","keqkuptimi","Entschuldigen Sie das Missverständnis.","Komunikimi"],
+["die Verständigung","mirëkuptimi / komunikimi","Eine klare Verständigung ist wichtig.","Komunikimi"],
+["das Verständnis","kuptimi / mirëkuptimi","Vielen Dank für Ihr Verständnis.","Komunikimi"],
+["die Geduld","durimi","Vielen Dank für Ihre Geduld.","Komunikimi"],
+["die Aufmerksamkeit","vëmendja","Danke für Ihre Aufmerksamkeit.","Komunikimi"],
+["die Beschwerde","ankesa","Wir bearbeiten Ihre Beschwerde.","Ankesat"],
+["die Reklamation","ankesa për produkt/shërbim","Ihre Reklamation wird geprüft.","Ankesat"],
+["die Unzufriedenheit","pakënaqësia","Ich verstehe Ihre Unzufriedenheit.","Ankesat"],
+["die Entschuldigung","kërkimfalja","Bitte entschuldigen Sie die Verzögerung.","Ankesat"],
+["die Unannehmlichkeit","shqetësimi / bezdia","Wir entschuldigen uns für die Unannehmlichkeiten.","Ankesat"],
+["die Lösung","zgjidhja","Wir suchen nach einer Lösung.","Ankesat"],
+["der Lösungsvorschlag","propozimi për zgjidhje","Ich habe einen Lösungsvorschlag.","Ankesat"],
+["die Eskalation","përshkallëzimi / kalimi në nivel më të lartë","Ich leite die Eskalation an mein Team weiter.","Ankesat"],
+["der Vorgesetzte / die Vorgesetzte","mbikëqyrësi / mbikëqyrësja","Ich bespreche den Fall mit meinem Vorgesetzten.","Ankesat"],
+["die zuständige Abteilung","departamenti përgjegjës","Ich kontaktiere die zuständige Abteilung.","Ankesat"],
+["sich kümmern um","të merresh me diçka","Ich kümmere mich darum.","Ankesat"],
+["sich entschuldigen","të kërkosh falje","Ich möchte mich dafür entschuldigen.","Ankesat"],
+["nachvollziehen","të kuptosh arsyen/pikëpamjen","Ich kann Ihren Ärger nachvollziehen.","Ankesat"],
+["verärgern","të zemërosh / irritosh","Das hat den Kunden verärgert.","Ankesat"],
+["die Rechnung","fatura","Ich sende Ihnen die Rechnung.","Pagesat"],
+["die Zahlung","pagesa","Ich überprüfe Ihre Zahlung.","Pagesat"],
+["die Rückerstattung","rimbursimi","Ihre Rückerstattung wird geprüft.","Pagesat"],
+["die Gutschrift","kreditimi / kreditnota","Die Gutschrift wurde erstellt.","Pagesat"],
+["die Abbuchung","debitimi / tërheqja e parave","Ich prüfe die Abbuchung.","Pagesat"],
+["die Überweisung","transferi bankar","Die Überweisung wurde veranlasst.","Pagesat"],
+["der Zahlungsstatus","statusi i pagesës","Ich prüfe den Zahlungsstatus.","Pagesat"],
+["die Zahlungsbestätigung","konfirmimi i pagesës","Die Zahlungsbestätigung wurde versendet.","Pagesat"],
+["die Mahnung","paralajmërimi për pagesë","Der Kunde hat eine Mahnung erhalten.","Pagesat"],
+["der Betrag","shuma","Der Betrag beträgt 50 Euro.","Pagesat"],
+["die Gebühr","tarifa","Für diesen Service fällt eine Gebühr an.","Pagesat"],
+["die Bestellung","porosia","Ich überprüfe Ihre Bestellung.","Porositë"],
+["die Bestellnummer","numri i porosisë","Wie lautet Ihre Bestellnummer?","Porositë"],
+["die Lieferung","dërgesa","Die Lieferung ist unterwegs.","Porositë"],
+["der Lieferstatus","statusi i dërgesës","Ich überprüfe den Lieferstatus.","Porositë"],
+["die Lieferverzögerung","vonesa e dërgesës","Wir entschuldigen uns für die Lieferverzögerung.","Porositë"],
+["die Sendungsverfolgung","gjurmimi i dërgesës","Hier finden Sie die Sendungsverfolgung.","Porositë"],
+["der Versand","dërgimi / transporti","Der Versand wurde vorbereitet.","Porositë"],
+["die Rücksendung","kthimi i produktit","Ich erkläre Ihnen den Ablauf der Rücksendung.","Porositë"],
+["die Stornierung","anulimi","Ich prüfe, ob eine Stornierung möglich ist.","Porositë"],
+["stornieren","të anulosh","Ich kann die Bestellung nach Prüfung stornieren.","Porositë"],
+["die Verfügbarkeit","disponueshmëria","Ich prüfe die Verfügbarkeit des Produkts.","Porositë"],
+["der Lagerbestand","gjendja e stokut","Der aktuelle Lagerbestand wird geprüft.","Porositë"],
+["das Ticket","rasti i regjistruar në sistem","Ich erstelle ein Ticket für Ihren Fall.","Sistemet"],
+["das Ticketsystem","sistemi i ticket-ave","Wir dokumentieren den Fall im Ticketsystem.","Sistemet"],
+["die Ticketnummer","numri i ticket-it","Ihre Ticketnummer lautet ...","Sistemet"],
+["die Bearbeitung","trajtimi / përpunimi","Die Bearbeitung dauert noch an.","Sistemet"],
+["der Bearbeitungsstatus","statusi i trajtimit","Ich überprüfe den Bearbeitungsstatus.","Sistemet"],
+["die Dokumentation","dokumentimi","Eine genaue Dokumentation ist wichtig.","Sistemet"],
+["der Vorgang","rasti / procesi","Ich öffne den Vorgang im System.","Sistemet"],
+["die Weiterleitung","përcjellja","Ich veranlasse die Weiterleitung.","Sistemet"],
+["der Rückruf","telefonata kthyese","Ich organisiere einen Rückruf.","Sistemet"],
+["die Warteschleife","radha e pritjes në telefon","Sie befinden sich in der Warteschleife.","Telefonata"],
+["die Verbindung","lidhja telefonike","Die Verbindung wurde unterbrochen.","Telefonata"],
+["der Gesprächspartner","bashkëbiseduesi","Ich verbinde Sie mit dem richtigen Gesprächspartner.","Telefonata"],
+["der Anruf","telefonata","Vielen Dank für Ihren Anruf.","Telefonata"],
+["der eingehende Anruf","telefonata hyrëse","Ich bearbeite eingehende Anrufe.","Telefonata"],
+["der ausgehende Anruf","telefonata dalëse","Ich tätige einen ausgehenden Anruf.","Telefonata"],
+["die Gesprächsnotiz","shënimi i bisedës","Ich erstelle eine Gesprächsnotiz.","Telefonata"],
+["die Gesprächszeit","koha e bisedës","Die Gesprächszeit wird dokumentiert.","Telefonata"],
+["das Gespräch beenden","ta përfundosh bisedën","Ich werde das Gespräch höflich beenden.","Telefonata"],
+["verbinden","të lidhësh / transferosh telefonatën","Ich verbinde Sie mit der Fachabteilung.","Telefonata"],
+["unterbrechen","të ndërpresësh","Entschuldigen Sie, darf ich Sie kurz unterbrechen?","Telefonata"],
+["die E-Mail","email-i","Ich sende Ihnen eine E-Mail.","Email"],
+["der Betreff","subjekti i email-it","Bitte formulieren Sie einen klaren Betreff.","Email"],
+["die Nachricht","mesazhi","Vielen Dank für Ihre Nachricht.","Email"],
+["der Anhang","bashkëngjitja","Die Datei befindet sich im Anhang.","Email"],
+["die Vorlage","shablloni / modeli","Ich verwende die freigegebene Vorlage.","Email"],
+["die Antwort","përgjigjja","Sie erhalten eine Antwort per E-Mail.","Email"],
+["die Abwesenheitsnotiz","njoftimi i mungesës","Die Abwesenheitsnotiz wurde aktiviert.","Email"],
+["die Rechtschreibung","drejtshkrimi","Bitte prüfen Sie die Rechtschreibung.","Email"],
+["die Vertraulichkeit","konfidencialiteti","Vertraulichkeit ist sehr wichtig.","Privatësia"],
+["der Datenschutz","mbrojtja e të dhënave","Wir beachten die Datenschutzregeln.","Privatësia"],
+["die Berechtigung","autorizimi / e drejta e qasjes","Ich prüfe Ihre Berechtigung.","Privatësia"],
+["die Identitätsprüfung","verifikimi i identitetit","Zuerst erfolgt die Identitätsprüfung.","Privatësia"],
+["das Benutzerkonto","llogaria e përdoruesit","Ich prüfe Ihr Benutzerkonto.","Privatësia"],
+["der Zugriff","qasja","Ich überprüfe Ihren Zugriff.","Privatësia"],
+["das Passwort","fjalëkalimi","Sie können Ihr Passwort zurücksetzen.","Privatësia"],
+["zurücksetzen","të rivendosësh","Ich erkläre Ihnen, wie Sie das Passwort zurücksetzen.","Privatësia"],
+["die Störung","defekti / ndërprerja e shërbimit","Uns ist eine Störung bekannt.","Teknika"],
+["die Fehlermeldung","mesazhi i gabimit","Welche Fehlermeldung wird angezeigt?","Teknika"],
+["der Fehler","gabimi","Ich untersuche den Fehler.","Teknika"],
+["die Verbindung unterbrechen","të ndërpresësh lidhjen","Die Verbindung wurde unterbrochen.","Teknika"],
+["beheben","të eliminosh një problem","Wir versuchen, das Problem zu beheben.","Teknika"],
+["aktualisieren","të përditësosh","Bitte aktualisieren Sie die Seite.","Teknika"],
+["die Einstellung","cilësimi","Ich überprüfe die Einstellungen.","Teknika"],
+["die Anmeldung","hyrja / regjistrimi","Die Anmeldung funktioniert nicht.","Teknika"],
+["die Fehlersuche","gjetja e shkakut të gabimit","Wir beginnen mit der Fehlersuche.","Teknika"],
+["die Erfahrung","përvoja","Ich habe Erfahrung im Kundenservice.","Intervista"],
+["die Stärke","pika e fortë","Eine meiner Stärken ist Geduld.","Intervista"],
+["die Schwäche","pika e dobët","Ich arbeite daran, meine Schwächen zu verbessern.","Intervista"],
+["die Zuverlässigkeit","besueshmëria","Zuverlässigkeit ist mir wichtig.","Intervista"],
+["die Teamfähigkeit","aftësia për të punuar në ekip","Ich bringe Teamfähigkeit mit.","Intervista"],
+["die Kommunikationsfähigkeit","aftësia komunikuese","Gute Kommunikationsfähigkeit ist wichtig.","Intervista"],
+["die Schicht","ndërrimi i punës","Ich kann in verschiedenen Schichten arbeiten.","Intervista"],
+["die Einarbeitung","trajnimi fillestar në punë","Ich lerne während der Einarbeitung das System kennen.","Intervista"],
+["die Rückmeldung zum Vorstellungsgespräch","përgjigjja pas intervistës","Vielen Dank für Ihre Rückmeldung.","Intervista"],
+["kundenorientiert","i orientuar drejt klientit","Ich arbeite kundenorientiert.","Intervista"],
+["lösungsorientiert","i orientuar drejt zgjidhjes","Ich arbeite lösungsorientiert.","Intervista"],
+["zuverlässig","i besueshëm","Ich bin zuverlässig und pünktlich.","Intervista"],
+["geduldig","i durueshëm","Ich bleibe auch unter Druck geduldig.","Intervista"],
+["sorgfältig","i kujdesshëm / i përpiktë","Ich dokumentiere Fälle sorgfältig.","Intervista"],
+["belastbar","i aftë të përballosh ngarkesën","Ich bleibe auch in stressigen Situationen ruhig.","Intervista"],
+["die Arbeitsweise","mënyra e punës","Meine Arbeitsweise ist strukturiert.","Intervista"],
+["die Verantwortung","përgjegjësia","Ich übernehme Verantwortung für meine Aufgaben.","Intervista"]
+];
+
+/* =====================================================
+   BISEDA PRAKTIKE
+===================================================== */
+const dialogues = [
+{
+ title:"Telefonatë hyrëse: klienti ka një pyetje",
+ level:"A2",
+ lines:[
+  ["agent","Guten Tag, Sie sprechen mit dem Kundenservice. Mein Name ist Müller. Wie kann ich Ihnen helfen?","Mirëdita, keni kontaktuar shërbimin ndaj klientit. Quhem Müller. Si mund t'ju ndihmoj?"],
+  ["customer","Guten Tag. Ich habe eine Frage zu meinem Vertrag.","Mirëdita. Kam një pyetje për kontratën time."],
+  ["agent","Gern. Damit ich Ihnen weiterhelfen kann, prüfe ich zunächst Ihre Kundendaten.","Me kënaqësi. Që t'ju ndihmoj, fillimisht do t'i kontrolloj të dhënat tuaja të klientit."],
+  ["customer","Ja, natürlich.","Po, natyrisht."],
+  ["agent","Vielen Dank. Worum geht es genau?","Faleminderit. Për çfarë bëhet fjalë saktësisht?"]
+ ],
+ note:"Përdor një përshëndetje të qartë, prezanto shërbimin dhe bëj pyetje të hapura. Verifikimi i identitetit duhet të ndjekë procedurën e kompanisë."
+},
+{
+ title:"Ankesë: klienti është i pakënaqur",
+ level:"B1",
+ lines:[
+  ["customer","Ich bin sehr unzufrieden. Meine Bestellung ist noch nicht angekommen.","Jam shumë i pakënaqur. Porosia ime ende nuk ka ardhur."],
+  ["agent","Es tut mir leid, dass Sie Ihre Bestellung noch nicht erhalten haben.","Më vjen keq që ende nuk e keni marrë porosinë."],
+  ["agent","Ich überprüfe gern den aktuellen Lieferstatus für Sie.","Me kënaqësi do ta kontrolloj statusin aktual të dërgesës."],
+  ["customer","Wann kann ich mit der Lieferung rechnen?","Kur mund ta pres dërgesën?"],
+  ["agent","Ich prüfe die verfügbaren Informationen und teile Ihnen den bestätigten Status mit.","Do t'i kontrolloj informacionet në dispozicion dhe do t'ju tregoj statusin e konfirmuar."]
+ ],
+ note:"Trego empati, kontrollo faktet dhe jep vetëm afate që janë konfirmuar nga sistemi ose procedura."
+},
+{
+ title:"Pagesa nuk është kryer",
+ level:"B1",
+ lines:[
+  ["customer","Meine Zahlung wurde abgelehnt. Was soll ich tun?","Pagesa ime u refuzua. Çfarë duhet të bëj?"],
+  ["agent","Ich helfe Ihnen gern. Welche Fehlermeldung wird angezeigt?","Me kënaqësi do t'ju ndihmoj. Çfarë mesazhi gabimi shfaqet?"],
+  ["customer","Dort steht, dass die Zahlung fehlgeschlagen ist.","Aty shkruan se pagesa ka dështuar."],
+  ["agent","Ich prüfe zunächst den Zahlungsstatus. Bitte teilen Sie mir keine vollständigen Kartendaten oder Passwörter mit.","Fillimisht po e kontrolloj statusin e pagesës. Ju lutem, mos më jepni të dhënat e plota të kartës ose fjalëkalime."],
+  ["customer","Alles klar. Vielen Dank.","Në rregull. Faleminderit."]
+ ],
+ note:"Mos kërko fjalëkalime ose të dhëna të plota të kartës. Ndiq gjithmonë udhëzimet e sigurisë së kompanisë."
+},
+{
+ title:"Email: kërkesa është pranuar",
+ level:"B1",
+ lines:[
+  ["agent","Sehr geehrte Frau Schneider,","E nderuar zonja Schneider,"],
+  ["agent","vielen Dank für Ihre Nachricht.","Faleminderit për mesazhin tuaj."],
+  ["agent","Wir haben Ihre Anfrage erhalten und prüfen den Sachverhalt.","E kemi pranuar kërkesën tuaj dhe po e shqyrtojmë rastin."],
+  ["agent","Sobald uns weitere Informationen vorliegen, melden wir uns bei Ihnen.","Sapo të kemi informacione të tjera, do t'ju kontaktojmë."],
+  ["agent","Mit freundlichen Grüßen\nIhr Kundenservice-Team","Me respekt,\nEkipi juaj i shërbimit ndaj klientit"]
+ ],
+ note:"Në email-et formale, përdor përshëndetje të përshtatshme, shpjego statusin dhe mos premto afat të pakonfirmuar."
+}
+];
+
+/* =====================================================
+   GJENDJA E APLIKACIONIT
+===================================================== */
+const content = document.getElementById("content");
+const lessonScreen = document.getElementById("lessonScreen");
+const questionArea = document.getElementById("questionArea");
+
+let activePage = "home";
+let activeModule = null;
+let questionOrder = [];
+let questionIndex = 0;
+let chosenAnswer = null;
+let answerChecked = false;
+let activeOptions = [];
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+function button(text, className, handler) {
+  const b = el("button", className, text);
+  b.type = "button";
+  b.addEventListener("click", handler);
+  return b;
+}
+function shuffle(items) {
+  const result = items.slice();
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+function setNavigation(page) {
+  activePage = page;
+  document.querySelectorAll("[data-page]").forEach(b => {
+    b.classList.toggle("active", b.dataset.page === page);
+  });
+}
+function showPage(page) {
+  setNavigation(page);
+  lessonScreen.classList.add("hidden");
+  document.getElementById("appLayout").classList.remove("hidden");
+  document.querySelector(".bottom-nav").classList.remove("hidden");
+
+  if (page === "home") renderHome();
+  if (page === "dictionary") renderDictionary();
+  if (page === "practice") renderPractice();
+  if (page === "interview") renderInterview();
+}
+function startModule(id) {
+  activeModule = modules.find(m => m.id === id);
+  if (!activeModule || !activeModule.questions.length) return;
+
+  questionOrder = shuffle(activeModule.questions.map((_, i) => i));
+  questionIndex = 0;
+  chosenAnswer = null;
+  answerChecked = false;
+
+  document.getElementById("appLayout").classList.add("hidden");
+  lessonScreen.classList.remove("hidden");
+  document.querySelector(".bottom-nav").classList.add("hidden");
+  renderQuestion();
+}
+function closeLesson() {
+  lessonScreen.classList.add("hidden");
+  document.getElementById("appLayout").classList.remove("hidden");
+  document.querySelector(".bottom-nav").classList.remove("hidden");
+  showPage("home");
+}
+function currentQuestion() {
+  return activeModule.questions[questionOrder[questionIndex]];
+}
+
+/* =====================================================
+   TESTI — kontrolli bazohet te fusha "correct".
+   Nuk varet nga renditja e alternativave.
+===================================================== */
+function renderQuestion() {
+  chosenAnswer = null;
+  answerChecked = false;
+  const q = currentQuestion();
+  const total = questionOrder.length;
+
+  document.getElementById("lessonBarFill").style.width =
+    (questionIndex / total * 100) + "%";
+  document.getElementById("lessonCount").textContent =
+    (questionIndex + 1) + " / " + total;
+
+  questionArea.replaceChildren();
+
+  questionArea.appendChild(el("div", "question-type",
+    activeModule.title + " · NIVELI " + activeModule.level));
+  questionArea.appendChild(el("h1", "question-title", q.prompt));
+  if (q.context) questionArea.appendChild(el("p", "question-instruction", q.context));
+  else questionArea.appendChild(el("p", "question-instruction",
+    "Zgjidh përgjigjen më të përshtatshme. Shiko shpjegimin pas kontrollimit."));
+
+  const prompt = el("div", "prompt-card");
+  if (q.translation) {
+    prompt.appendChild(el("div", "prompt-german", q.translation));
+  } else {
+    prompt.appendChild(el("div", "prompt-german", "Wähle die richtige Antwort."));
+  }
+  if (q.context) prompt.appendChild(el("div", "prompt-context", q.context));
+  questionArea.appendChild(prompt);
+
+  const answers = el("div", "answer-list");
+  answers.id = "answerList";
+  activeOptions = shuffle(q.options);
+
+  activeOptions.forEach((option, i) => {
+    const b = el("button", "answer-option");
+    b.type = "button";
+    b.appendChild(el("span", "option-letter", String.fromCharCode(65 + i)));
+    b.appendChild(el("span", "", option));
+    b.addEventListener("click", () => {
+      if (answerChecked) return;
+      chosenAnswer = option;
+      answers.querySelectorAll(".answer-option").forEach(item => {
+        item.classList.remove("selected");
+      });
+      b.classList.add("selected");
+      document.getElementById("checkAnswer").disabled = false;
+    });
+    answers.appendChild(b);
+  });
+  questionArea.appendChild(answers);
+
+  const feedback = el("div", "");
+  feedback.id = "answerFeedback";
+  questionArea.appendChild(feedback);
+
+  const footer = el("div", "lesson-footer");
+  footer.appendChild(button("Mbyll mësimin", "outline", closeLesson));
+  const check = button("Kontrollo përgjigjen", "primary", checkAnswer);
+  check.id = "checkAnswer";
+  check.disabled = true;
+  footer.appendChild(check);
+  questionArea.appendChild(footer);
+}
+
+function checkAnswer() {
+  const q = currentQuestion();
+  const checkButton = document.getElementById("checkAnswer");
+
+  if (answerChecked) {
+    questionIndex++;
+    if (questionIndex >= questionOrder.length) {
+      renderCompletion();
+    } else {
+      renderQuestion();
+    }
+    return;
+  }
+  if (chosenAnswer === null) return;
+
+  answerChecked = true;
+  const correct = chosenAnswer === q.correct;
+  const buttons = document.querySelectorAll("#answerList .answer-option");
+
+  buttons.forEach(b => {
+    b.disabled = true;
+    const text = b.lastElementChild.textContent;
+    if (text === q.correct) b.classList.add("correct");
+    if (text === chosenAnswer && !correct) b.classList.add("incorrect");
+  });
+
+  const feedback = document.getElementById("answerFeedback");
+  feedback.className = "feedback " + (correct ? "good" : "bad");
+
+  feedback.appendChild(el("h3", "", correct
+    ? "Përgjigjja është e saktë"
+    : "Përgjigjja nuk është e saktë"));
+
+  feedback.appendChild(el("p", "explain",
+    "Përgjigjja e saktë: " + q.correct));
+
+  feedback.appendChild(el("p", "explain", q.explanation));
+
+  if (!correct && q.distractors && q.distractors[chosenAnswer]) {
+    feedback.appendChild(el("p", "why",
+      "Pse alternativa jote nuk përshtatet: " + q.distractors[chosenAnswer]));
+  }
+
+  if (correct) {
+    feedback.appendChild(el("p", "why",
+      "Këshillë: thuaje shprehjen me zë dhe provo ta përdorësh në një fjali tjetër."));
+  }
+
+  checkButton.textContent = questionIndex === questionOrder.length - 1
+    ? "Përfundo mësimin"
+    : "Pyetja tjetër →";
+  checkButton.disabled = false;
+}
+function renderCompletion() {
+  document.getElementById("lessonBarFill").style.width = "100%";
+  document.getElementById("lessonCount").textContent = "Përfunduar";
+  questionArea.replaceChildren();
+
+  const wrap = el("div", "completion");
+  wrap.appendChild(el("div", "completion-icon", "📘"));
+  wrap.appendChild(el("div", "eyebrow", "MËSIMI U PËRFUNDUA"));
+  wrap.appendChild(el("h1", "", "Sehr gut!"));
+  wrap.appendChild(el("p", "",
+    "E përfundove modulin \"" + activeModule.title + "\". Përsëriti shprehjet që të duken të vështira dhe provo t'i thuash me zë."));
+  wrap.appendChild(button("Kthehu te të gjitha mësimet", "primary full", closeLesson));
+  wrap.appendChild(document.createElement("br"));
+  wrap.appendChild(document.createElement("br"));
+
+  const next = modules.find(m => m.id !== activeModule.id);
+  if (next) {
+    wrap.appendChild(button("Vazhdo te " + next.title, "secondary full", () => startModule(next.id)));
+  }
+  questionArea.appendChild(wrap);
+}
+
+/* =====================================================
+   FAQJA KRYESORE
+===================================================== */
+function renderHome() {
+  content.replaceChildren();
+
+  const hero = el("section", "hero");
+  hero.appendChild(el("div", "eyebrow", "GJERMANISHT PËR PUNË"));
+  hero.appendChild(el("h1", "", "Komuniko me besim në Kundenservice."));
+  hero.appendChild(el("p", "",
+    "Mëso shprehje profesionale, kupto situatat e klientëve dhe përgatitu për intervista pune në gjermanisht."));
+  const heroBottom = el("div", "hero-bottom");
+  heroBottom.appendChild(button("Fillo të mësosh →", "primary", () => {
+    const first = modules[0];
+    startModule(first.id);
+  }));
+  heroBottom.appendChild(el("span", "hero-caption",
+    "Pa pikë, pa jetë dhe pa elemente shpërqendruese."));
+  hero.appendChild(heroBottom);
+  content.appendChild(hero);
+
+  const info = el("div", "info-grid");
+  [
+    ["📚","Fjalor profesional","Terma me përkthim dhe shembuj."],
+    ["🎧","Situata reale","Dialogë nga puna e përditshme."],
+    ["💼","Intervista","Pyetje dhe përgjigje model."]
+  ].forEach(row => {
+    const tile = el("div", "info-tile");
+    tile.appendChild(el("span", "", row[0]));
+    const text = el("div", "");
+    text.appendChild(el("strong", "", row[1]));
+    text.appendChild(el("p", "", row[2]));
+    tile.appendChild(text);
+    info.appendChild(tile);
+  });
+  content.appendChild(info);
+
+  const heading = el("div", "section-heading");
+  const left = el("div", "");
+  left.appendChild(el("h2", "", "Rruga e mësimit"));
+  left.appendChild(el("p", "", "Zgjidh një temë dhe fillo me pyetjet praktike."));
+  heading.appendChild(left);
+  heading.appendChild(el("span", "pill", modules.length + " MODULE"));
+  content.appendChild(heading);
+
+  const list = el("div", "module-list");
+  modules.forEach(m => {
+    const b = el("button", "module-card");
+    b.type = "button";
+    const icon = el("div", "module-icon", m.icon);
+    icon.style.background = m.color;
+    const info = el("div", "module-info");
+    info.appendChild(el("strong", "", m.title));
+    info.appendChild(el("p", "", m.subtitle));
+    const meta = el("div", "module-meta");
+    meta.appendChild(el("span", "pill", "Niveli " + m.level));
+    meta.appendChild(el("span", "pill", m.questions.length + " pyetje"));
+    info.appendChild(meta);
+    b.append(icon, info, el("span", "module-arrow", "›"));
+    b.addEventListener("click", () => startModule(m.id));
+    list.appendChild(b);
+  });
+  content.appendChild(list);
+}
+
+/* =====================================================
+   FJALORI: KËRKIM DHE FILTRIM
+===================================================== */
+function renderDictionary() {
+  content.replaceChildren();
+
+  const heading = el("div", "page-heading");
+  heading.appendChild(el("div", "eyebrow", "DEUTSCH–SHQIP"));
+  heading.appendChild(el("h1", "", "Fjalori i Kundenservice"));
+  heading.appendChild(el("p", "",
+    "Kërko fjalë gjermanisht ose shqip. Mëso kuptimin dhe shembullin në kontekst."));
+  content.appendChild(heading);
+
+  const panel = el("section", "panel");
+  const search = el("input", "search");
+  search.type = "search";
+  search.placeholder = "🔎 Kërko fjalë, përkthim ose shembull...";
+  search.setAttribute("aria-label", "Kërko në fjalor");
+  panel.appendChild(search);
+
+  const categories = ["Të gjitha", ...new Set(dictionary.map(d => d[3]))];
+  const filters = el("div", "filters");
+  let selectedCategory = "Të gjitha";
+
+  categories.forEach(cat => {
+    const b = button(cat, "filter-btn" + (cat === selectedCategory ? " active" : ""), () => {
+      selectedCategory = cat;
+      filters.querySelectorAll("button").forEach(x => x.classList.toggle("active", x.textContent === cat));
+      renderResults();
+    });
+    filters.appendChild(b);
+  });
+  panel.appendChild(filters);
+
+  const count = el("p", "");
+  count.style.fontSize = "12px";
+  count.style.margin = "0 0 6px";
+  panel.appendChild(count);
+
+  const results = el("div", "");
+  panel.appendChild(results);
+  content.appendChild(panel);
+
+  function renderResults() {
+    results.replaceChildren();
+    const term = search.value.trim().toLocaleLowerCase("de");
+    const filtered = dictionary.filter(d => {
+      const matchesText = d.join(" ").toLocaleLowerCase("de").includes(term);
+      const matchesCategory = selectedCategory === "Të gjitha" || d[3] === selectedCategory;
+      return matchesText && matchesCategory;
+    });
+    count.textContent = "U gjetën " + filtered.length + " fjalë.";
+
+    if (!filtered.length) {
+      results.appendChild(el("div", "empty-state",
+        "Nuk u gjet asnjë rezultat. Provo një fjalë tjetër."));
+      return;
+    }
+
+    filtered.forEach(d => {
+      const item = el("article", "dictionary-item");
+      const top = el("div", "dict-top");
+      const wordBox = el("div", "");
+      wordBox.appendChild(el("div", "category-label", d[3]));
+      wordBox.appendChild(el("div", "dict-word", d[0]));
+      top.appendChild(wordBox);
+      top.appendChild(button("🔊", "audio-btn", () => speak(d[0])));
+      item.appendChild(top);
+      item.appendChild(el("p", "dict-translation", d[1]));
+      item.appendChild(el("p", "dict-example", "„" + d[2] + "“"));
+      item.appendChild(button("Dëgjo shembullin", "secondary", () => speak(d[2])));
+      results.appendChild(item);
+    });
+  }
+  search.addEventListener("input", renderResults);
+  renderResults();
+}
+
+/* =====================================================
+   DIALOGËT PRAKTIKË
+===================================================== */
+function renderPractice() {
+  content.replaceChildren();
+  const heading = el("div", "page-heading");
+  heading.appendChild(el("div", "eyebrow", "PRAKTIKË E PËRDITSHME"));
+  heading.appendChild(el("h1", "", "Biseda nga puna"));
+  heading.appendChild(el("p", "", "Lexo dialogët, kupto përkthimin dhe ushtroji shprehjet me zë."));
+  content.appendChild(heading);
+
+  dialogues.forEach(dialogue => {
+    const details = el("details", "interview-item");
+    const summary = el("summary", "");
+    summary.textContent = dialogue.title + " · " + dialogue.level;
+    details.appendChild(summary);
+
+    const body = el("div", "interview-body");
+    const lines = el("div", "call-dialogue");
+
+    dialogue.lines.forEach(line => {
+      const agent = line[0] === "agent";
+      const item = el("div", "dialogue-line " + (agent ? "agent" : "customer"));
+      item.appendChild(el("strong", "", agent ? "AGJENTI" : "KLIENTI"));
+      item.appendChild(el("p", "", line[1]));
+      item.appendChild(el("p", "", line[2]));
+      item.appendChild(button("🔊 Dëgjo gjermanisht", "audio-btn", () => speak(line[1])));
+      lines.appendChild(item);
+    });
+    body.appendChild(lines);
+
+    const note = el("div", "call-note");
+    note.appendChild(el("strong", "", "Çfarë duhet të mësosh"));
+    note.appendChild(el("p", "", dialogue.note));
+    body.appendChild(note);
+
+    details.appendChild(body);
+    content.appendChild(details);
+  });
+}
+
+/* =====================================================
+   PËRGATITJA PËR INTERVISTË
+===================================================== */
+const interviewQuestions = [
+{
+ q:"Erzählen Sie etwas über sich.",
+ sq:"Na tregoni pak për veten.",
+ a:"Ich habe Erfahrung im Kundenservice und in der Kommunikation mit Kunden. Ich arbeite strukturiert, zuverlässig und lösungsorientiert.",
+ note:"Prezantohu shkurt: përvoja reale, aftësitë gjuhësore dhe pikat e forta që lidhen me pozitën."
+},
+{
+ q:"Warum möchten Sie bei uns arbeiten?",
+ sq:"Pse dëshironi të punoni te ne?",
+ a:"Ich möchte meine Sprachkenntnisse einsetzen, meine beruflichen Fähigkeiten weiterentwickeln und zu einem guten Kundenerlebnis beitragen.",
+ note:"Lidhe motivimin me pozitën dhe kompaninë. Shmang përgjigjet e përgjithshme pa shembuj."
+},
+{
+ q:"Was sind Ihre Stärken?",
+ sq:"Cilat janë pikat tuaja të forta?",
+ a:"Ich bin geduldig, zuverlässig und kommunikativ. Außerdem bleibe ich auch in schwierigen Situationen ruhig.",
+ note:"Përmend dy ose tri pika të forta që i ke realisht. Përgatit edhe një shembull për secilën."
+},
+{
+ q:"Wie gehen Sie mit schwierigen Kunden um?",
+ sq:"Si veproni me klientët e vështirë?",
+ a:"Ich höre aufmerksam zu, zeige Verständnis und suche nach einer sachlichen und passenden Lösung.",
+ note:"Trego dëgjim aktiv, empati, qetësi dhe orientim drejt zgjidhjes."
+},
+{
+ q:"Was machen Sie, wenn Sie die Antwort nicht wissen?",
+ sq:"Çfarë bëni kur nuk e dini përgjigjen?",
+ a:"Ich prüfe die verfügbaren Informationen und wende mich bei Bedarf an die zuständige Abteilung.",
+ note:"Është më profesionale të verifikosh informacionin sesa të japësh përgjigje të pasakta."
+},
+{
+ q:"Haben Sie Erfahrung mit Ticketsystemen?",
+ sq:"A keni përvojë me sistemet e ticket-ave?",
+ a:"Ich kann Kundenanfragen dokumentieren, Informationen strukturiert erfassen und den Bearbeitungsstatus verfolgen.",
+ note:"Përshtate me përvojën tënde reale. Nëse nuk e ke përdorur një sistem të caktuar, thuaj se je i gatshëm ta mësosh."
+},
+{
+ q:"Wie gehen Sie mit Stress um?",
+ sq:"Si e menaxhoni stresin?",
+ a:"Ich priorisiere meine Aufgaben, bleibe ruhig und konzentriere mich auf die nächsten notwendigen Schritte.",
+ note:"Jep një shembull të vërtetë kur ke menaxhuar disa detyra ose një situatë të vështirë."
+},
+{
+ q:"Warum sollten wir Sie einstellen?",
+ sq:"Pse duhet t'ju punësojmë?",
+ a:"Ich bringe eine kundenorientierte Einstellung mit, lerne schnell und lege Wert auf klare und professionelle Kommunikation.",
+ note:"Përmblidh çfarë mund t'i ofrosh ekipit dhe pse aftësitë e tua përputhen me pozitën."
+},
+{
+ q:"Wie gut sprechen Sie Deutsch?",
+ sq:"Sa mirë flisni gjermanisht?",
+ a:"Ich kann auf Deutsch kommunizieren und arbeite kontinuierlich daran, meine Sprachkenntnisse zu verbessern.",
+ note:"Përgjigju sinqerisht për nivelin tënd dhe përmend si e përmirëson gjermanishten."
+},
+{
+ q:"Können Sie im Schichtdienst arbeiten?",
+ sq:"A mund të punoni me ndërrime?",
+ a:"Ich bin bereit, die Arbeitszeiten und Schichtmodelle zu besprechen, die für diese Position vorgesehen sind.",
+ note:"Përshtate përgjigjen me disponueshmërinë tënde reale. Mos premto orar që nuk mund ta respektosh."
+}
+];
+
+function renderInterview() {
+  content.replaceChildren();
+  const heading = el("div", "page-heading");
+  heading.appendChild(el("div", "eyebrow", "VORBEREITUNG AUF DAS VORSTELLUNGSGESPRÄCH"));
+  heading.appendChild(el("h1", "", "Intervista e punës"));
+  heading.appendChild(el("p", "", "Pyetje tipike, përkthim shqip dhe përgjigje model në gjermanisht."));
+  content.appendChild(heading);
+
+  const intro = el("div", "panel");
+  intro.appendChild(el("h2", "", "Si të praktikohesh"));
+  intro.appendChild(el("p", "",
+    "Lexo pyetjen në gjermanisht, provo të përgjigjesh vetë dhe pastaj hape përgjigjen model. Përdore si shembull, jo si tekst që duhet mësuar përmendësh."));
+  content.appendChild(intro);
+
+  interviewQuestions.forEach((item, i) => {
+    const details = el("details", "interview-item");
+    const summary = el("summary", "");
+    summary.textContent = (i + 1) + ". " + item.q;
+    details.appendChild(summary);
+
+    const body = el("div", "interview-body");
+    body.appendChild(el("p", "", item.sq));
+
+    const model = el("div", "model-answer");
+    model.appendChild(el("div", "example-label", "PËRGJIGJE MODEL"));
+    model.appendChild(el("p", "", item.a));
+    model.appendChild(button("🔊 Dëgjo përgjigjen", "secondary", () => speak(item.a)));
+    body.appendChild(model);
+
+    body.appendChild(el("p", "", "Këshillë: " + item.note));
+    details.appendChild(body);
+    content.appendChild(details);
+  });
+}
+
+/* =====================================================
+   SHQIPTIMI
+===================================================== */
+function speak(text) {
+  if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+    alert("Shqiptimi automatik nuk mbështetet nga ky shfletues. Mund ta lexosh tekstin në ekran.");
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "de-DE";
+  utterance.rate = 0.86;
+
+  const voices = window.speechSynthesis.getVoices();
+  const voice = voices.find(v => v.lang.toLowerCase().startsWith("de"));
+  if (voice) utterance.voice = voice;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+/* =====================================================
+   KONTROLLE AUTOMATIKE TË KONSISTENCËS
+   Kontrollon që çdo pyetje ka alternativë të saktë
+   dhe që ajo gjendet mes alternativave.
+===================================================== */
+function validateQuestions() {
+  const errors = [];
+  modules.forEach(module => {
+    module.questions.forEach((q, index) => {
+      const prefix = module.id + " / pyetja " + (index + 1);
+      if (!Array.isArray(q.options) || q.options.length < 2) {
+        errors.push(prefix + ": mungojnë alternativat.");
+      }
+      if (!q.options.includes(q.correct)) {
+        errors.push(prefix + ": përgjigjja e saktë nuk gjendet te alternativat.");
+      }
+      if (new Set(q.options).size !== q.options.length) {
+        errors.push(prefix + ": ka alternativa të përsëritura.");
+      }
+      if (!q.explanation || !q.translation) {
+        errors.push(prefix + ": mungon shpjegimi ose përkthimi.");
+      }
+    });
+  });
+  return errors;
+}
+
+document.querySelectorAll("[data-page]").forEach(b => {
+  b.addEventListener("click", () => showPage(b.dataset.page));
+});
+document.getElementById("closeLesson").addEventListener("click", closeLesson);
+
+const validationErrors = validateQuestions();
+if (validationErrors.length) {
+  content.replaceChildren();
+  const errorPanel = el("section", "panel");
+  errorPanel.appendChild(el("h2", "", "Ka gabime në përmbajtjen e mësimeve"));
+  validationErrors.forEach(message => errorPanel.appendChild(el("p", "", message)));
+  content.appendChild(errorPanel);
+} else {
+  renderHome();
+}
+</script>
+</body>
+</html>
